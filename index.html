@@ -25,13 +25,28 @@
                 </div>
             </div>
             <div class="card-body pb-0">
-                <fieldset class="fieldset">
-                    <label class="label text-base font-medium text-gray-600">Username</label>
-                    <input type="text" class="input" placeholder="Enter Your Username" />
-                    <label class="label text-base font-medium text-gray-600">Password</label>
-                    <input type="password" class="input" placeholder="Password" />
-                    <button class="btn btn-primary mt-4 rounded-lg">Sign In</button>
-                </fieldset>
+            <fieldset id="loginForm" class="fieldset relative">
+                <label class="label text-base font-medium text-gray-600">Username</label>
+                <input type="text" id="inputUsername" class="input" placeholder="Enter Your Username" />
+
+                <label class="label text-base font-medium text-gray-600">Password</label>
+                <input type="password" id="inputPassword" class="input" placeholder="Password" />
+
+                <button id="signInBtn" class="btn btn-primary mt-4 rounded-lg">Sign In</button>
+                <div role="alert" id="failAlert"
+                    class="alert alert-error alert-soft mt-2 hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Invalid username or password. Please try again.</span>
+                </div>
+            </fieldset>
             </div>
             <div class="divider px-7">OR</div>
             <div class="card-body pt-0 text-center">
@@ -42,7 +57,49 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <dialog id="successModal" class="modal">
+        <div class="modal-box text-center">
+
+            <!-- Success Icon -->
+            <div class="flex justify-center mb-4">
+            <div class="bg-green-100 p-4 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-10 h-10 text-green-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-bold text-xl text-green-600">
+            Login Successful
+            </h3>
+
+            <!-- Message -->
+            <p class="py-3 text-gray-600">
+            Welcome back! You have successfully signed in.
+            </p>
+
+            <!-- Button -->
+            <div class="modal-action justify-center">
+            <form method="dialog">
+                <button class="btn btn-success text-white px-6">
+                Continue
+                </button>
+            </form>
+            </div>
+
+        </div>
+        </dialog>
     </section>
-    <script src="./js/main.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>
