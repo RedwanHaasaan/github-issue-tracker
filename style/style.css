@@ -8,9 +8,17 @@
     body{
         font-family: "Geist", sans-serif;
     }
+
 }
 @layer utilities{
     .bg-color{
         background-color: #F8FAFC;
     }
+    .bg-card-section{
+        background-color: #FBFBFB;
+    }
+    .bg-aperture{
+        background-color: #ECE4FF;
+    }
+
 }
