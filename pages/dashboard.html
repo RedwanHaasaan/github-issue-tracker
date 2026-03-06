@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,72 @@
     <!-- tailwind & daisy ui -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awosome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <!-- Css File -->
     <link rel="stylesheet" href="./style/style.css">
     <!-- Favicon -->
-     <link rel="shortcut icon" href="../assets/github-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/github-logo.png" type="image/x-icon">
 </head>
+
 <body>
-    <h1>Welcome to Dashboard</h1>
+    <nav>
+        <div class="navbar bg-base-100 shadow-sm px-3">
+            <!-- Left Side -->
+            <div class="flex-1">
+                <a class="flex items-center gap-2">
+                    <img src="../assets/github-logo.png" alt="Logo" class="w-8 h-8">
+                    <span class="text-lg sm:text-xl font-semibold text-gray-700">
+                        GitHub Issues Tracker
+                    </span>
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="lg:hidden">
+                <button class="btn btn-ghost" onclick="toggleMenu()">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+            <div id="navMenu" class="hidden lg:flex gap-3 items-center">
+                <!-- Search -->
+                <label class="input input-bordered flex items-center gap-2">
+                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" placeholder="Search" class="w-32 sm:w-48" />
+                </label>
+                <!-- New Issue Button -->
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="hidden sm:inline">New Issue</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden flex-col p-4 bg-base-100 shadow lg:hidden">
+            <label class="input input-bordered flex items-center gap-2 w-full">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                        stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                </svg>
+                <input type="search" placeholder="Search" class="w-full" />
+            </label>
+            <button class="btn btn-primary w-full mt-4">
+                <i class="fa-solid fa-plus"></i>
+                <span>New Issue</span>
+            </button>
+        </div>
+    </nav>
+    
+    <script src="../js/dashboard.js"></script>
 </body>
+
 </html>
