@@ -49,6 +49,15 @@ async function fetchAllIssues() {
   allIssues = data.data;
   displayCards(allIssues);
 }
+//fetch single issue api function
+async function fetchSingleIssues(id) {
+  const response = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+  const data = await response.json();
+  const issue = data.data;
+  displayModal(issue);
+}
 //Priority Config
 const priorityConfig = {
   high: {
@@ -160,6 +169,10 @@ function displayCards(issues) {
   cardContainer.innerHTML = "";
   for (const issue of issues) {
     const issuecard = document.createElement("div");
+    issuecard.setAttribute("id", `issuecard-${issue.id}`);
+    issuecard.addEventListener("click", () => {
+      fetchSingleIssues(issue.id);
+    });
     if (issue.status == "open") {
       issuecard.classList =
         "bg-white shadow-md w-full max-w-xs flex flex-col justify-between p-4 rounded-md border-t-4 border-success min-h-96";
@@ -203,6 +216,57 @@ function displayCards(issues) {
   `;
     cardContainer.appendChild(issuecard);
   }
+}
+//status config
+const statusConfig = {
+  open: {
+    class: "badge badge-success badge-sm text-white",
+    label: "Opened"
+  },
+  closed: {
+    class: "badge badge-error badge-sm text-white",
+    label: "Closed"
+  }
+};
+//display modal
+function displayModal(issue) {
+
+  const modal = document.getElementById("issueModal");
+
+  // title
+  document.getElementById("modalTitle").textContent = issue.title;
+
+  // status
+  const status = statusConfig[issue.status];
+  document.getElementById("modalStatus").innerHTML =
+    `<span class="${status.class}">${status.label}</span>`;
+
+  // author
+  document.getElementById("modalAuthor").textContent =
+    `• Opened by ${issue.author}`;
+
+  // date
+  document.getElementById("modalDate").textContent =
+    `• ${formatDate(issue.createdAt)}`;
+
+  // description
+  document.getElementById("modalDescription").textContent =
+    issue.description;
+
+  // assignee
+  document.getElementById("modalAssignee").textContent =
+    issue.assignee || "Unassigned";
+
+  // priority (using your reusable function)
+  document.getElementById("modalPriority").innerHTML =
+    createPriority(issue.priority);
+
+  // labels (using your reusable function)
+  document.getElementById("modalLabels").innerHTML =
+    renderBadges(issue.labels);
+
+  // open modal
+  modal.showModal();
 }
 
 fetchAllIssues();
