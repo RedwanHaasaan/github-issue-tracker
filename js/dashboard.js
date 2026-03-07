@@ -6,7 +6,9 @@ const openPing= document.getElementById("openPing");
 const closedPing= document.getElementById("closedPing");
 const desktopSearch = document.getElementById("searchInput");
 const mobileSearch = document.getElementById("mobileSearchInput");
+const spinner = document.getElementById("spinner");
 let allIssues = [];
+
 //mobile menu
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
@@ -44,16 +46,31 @@ buttons.forEach((btn) => {
 
 //fetch all issues api function
 async function fetchAllIssues() {
+
   try {
+
+    setLoading(true);
+
     const response = await fetch(
       "https://phi-lab-server.vercel.app/api/v1/lab/issues"
     );
+
     const data = await response.json();
+
     allIssues = data.data;
+
     displayCards(allIssues);
+
   } catch (error) {
-    console.error(error);
+
+    console.error("Fetch error:", error);
+
+  } finally {
+
+    setLoading(false);
+
   }
+
 }
 //fetch single issue api function
 async function fetchSingleIssues(id) {
@@ -66,15 +83,29 @@ async function fetchSingleIssues(id) {
 }
 //fetch search issue api
 async function searchIssues(query) {
+
   try {
+
+    setLoading(true);
+
     const response = await fetch(
       `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`
     );
+
     const data = await response.json();
+
     displayCards(data.data);
+
   } catch (error) {
-    console.error(error);
+
+    console.error("Search failed:", error);
+
+  } finally {
+
+    setLoading(false);
+
   }
+
 }
 //Priority Config
 const priorityConfig = {
@@ -184,10 +215,9 @@ function formatDate(dateStr) {
 function displayCards(issues) {
   const length = issues.length;
   issuCounter.innerText = length;
-  document.querySelectorAll(".issue-card").forEach(card => card.remove());
+  cardContainer.innerHTML = "";
   for (const issue of issues) {
     const issuecard = document.createElement("div");
-    issuecard.classList.add("issue-card");
     issuecard.setAttribute("id", `issuecard-${issue.id}`);
     issuecard.addEventListener("click", () => {
       fetchSingleIssues(issue.id);
@@ -316,4 +346,19 @@ mobileSearch.addEventListener("input", (e) => {
   handleSearch(e.target.value);
 });
 
+//loading functionality
+
+function setLoading(isLoading) {
+
+  if (isLoading) {
+    spinner.classList.add("flex");
+    spinner.classList.remove("hidden");
+    cardContainer.classList.add("opacity-50","pointer-events-none");
+  } else {
+    spinner.classList.add("hidden");
+    spinner.classList.remove("flex");
+    cardContainer.classList.remove("opacity-50","pointer-events-none");
+  }
+
+}
 fetchAllIssues();
