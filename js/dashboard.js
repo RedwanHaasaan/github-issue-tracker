@@ -4,7 +4,8 @@ const issuCounter = document.getElementById("issueCounter");
 const buttons = document.querySelectorAll("#btnContainer .btn");
 const openPing= document.getElementById("openPing");
 const closedPing= document.getElementById("closedPing");
-const searchInput = document.getElementById("searchInput");
+const desktopSearch = document.getElementById("searchInput");
+const mobileSearch = document.getElementById("mobileSearchInput");
 let allIssues = [];
 //mobile menu
 function toggleMenu() {
@@ -43,12 +44,16 @@ buttons.forEach((btn) => {
 
 //fetch all issues api function
 async function fetchAllIssues() {
-  const response = await fetch(
-    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
-  );
-  const data = await response.json();
-  allIssues = data.data;
-  displayCards(allIssues);
+  try {
+    const response = await fetch(
+      "https://phi-lab-server.vercel.app/api/v1/lab/issues"
+    );
+    const data = await response.json();
+    allIssues = data.data;
+    displayCards(allIssues);
+  } catch (error) {
+    console.error(error);
+  }
 }
 //fetch single issue api function
 async function fetchSingleIssues(id) {
@@ -62,19 +67,13 @@ async function fetchSingleIssues(id) {
 //fetch search issue api
 async function searchIssues(query) {
   try {
-
     const response = await fetch(
       `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`
     );
-
     const data = await response.json();
-
-    const issues = data.data;
-
-    displayCards(issues);
-
+    displayCards(data.data);
   } catch (error) {
-    console.error("Search failed:", error);
+    console.error(error);
   }
 }
 //Priority Config
@@ -185,9 +184,10 @@ function formatDate(dateStr) {
 function displayCards(issues) {
   const length = issues.length;
   issuCounter.innerText = length;
-  cardContainer.innerHTML = "";
+  document.querySelectorAll(".issue-card").forEach(card => card.remove());
   for (const issue of issues) {
     const issuecard = document.createElement("div");
+    issuecard.classList.add("issue-card");
     issuecard.setAttribute("id", `issuecard-${issue.id}`);
     issuecard.addEventListener("click", () => {
       fetchSingleIssues(issue.id);
@@ -291,11 +291,11 @@ function displayModal(issue) {
 //search functionality
 let timer;
 
-searchInput.addEventListener("input", (e) => {
+function handleSearch(value) {
 
   clearTimeout(timer);
 
-  const text = e.target.value.trim();
+  const text = value.trim();
 
   timer = setTimeout(() => {
 
@@ -307,6 +307,13 @@ searchInput.addEventListener("input", (e) => {
 
   }, 400);
 
+}
+desktopSearch.addEventListener("input", (e) => {
+  handleSearch(e.target.value);
+});
+
+mobileSearch.addEventListener("input", (e) => {
+  handleSearch(e.target.value);
 });
 
 fetchAllIssues();
