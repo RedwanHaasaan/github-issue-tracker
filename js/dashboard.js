@@ -4,6 +4,7 @@ const issuCounter = document.getElementById("issueCounter");
 const buttons = document.querySelectorAll("#btnContainer .btn");
 const openPing= document.getElementById("openPing");
 const closedPing= document.getElementById("closedPing");
+const searchInput = document.getElementById("searchInput");
 let allIssues = [];
 //mobile menu
 function toggleMenu() {
@@ -57,6 +58,24 @@ async function fetchSingleIssues(id) {
   const data = await response.json();
   const issue = data.data;
   displayModal(issue);
+}
+//fetch search issue api
+async function searchIssues(query) {
+  try {
+
+    const response = await fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`
+    );
+
+    const data = await response.json();
+
+    const issues = data.data;
+
+    displayCards(issues);
+
+  } catch (error) {
+    console.error("Search failed:", error);
+  }
 }
 //Priority Config
 const priorityConfig = {
@@ -268,5 +287,26 @@ function displayModal(issue) {
   // open modal
   modal.showModal();
 }
+
+//search functionality
+let timer;
+
+searchInput.addEventListener("input", (e) => {
+
+  clearTimeout(timer);
+
+  const text = e.target.value.trim();
+
+  timer = setTimeout(() => {
+
+    if (text === "") {
+      displayCards(allIssues);
+    } else {
+      searchIssues(text);
+    }
+
+  }, 400);
+
+});
 
 fetchAllIssues();
