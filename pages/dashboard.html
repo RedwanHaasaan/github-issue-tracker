@@ -72,7 +72,7 @@
             </button>
         </div>
     </nav>
-    <main class="bg-gray-50 min-h-screen py-6 px-4 sm:px-6 lg:px-16 xl:px-32">
+    <main class="bg-gray-100 min-h-screen py-6 px-4 sm:px-6 lg:px-16 xl:px-32">
         <section class="flex flex-col gap-4">
             <!-- Upper Container -->
             <div class="bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row gap-3">
@@ -87,7 +87,7 @@
                 </button>
             </div>
             <!-- Lower Container -->
-            <div class="bg-card-section">
+            <div class="bg-card-section flex flex-col gap-6">
                 <div
                     class="bg-white shadow-md rounded-lg p-4 sm:p-6 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
                     <!-- LEFT -->
@@ -123,6 +123,84 @@
                             </div>
                             <span class="text-sm font-medium">Closed</span>
                         </div>
+                    </div>
+                </div>
+                <div class="lg:p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center">
+                        <!-- Cards will be there -->
+                         <!-- open -->
+                         <div class="bg-white shadow-md max-w-xs p-4 rounded-md border-t-4 border-success">
+                            <!-- Upper -->
+                            <div class="p-4 pb-0 flex flex-col gap-4">
+                                <!-- Top -->
+                                <div class="flex flex-row justify-between">
+                                    <div>
+                                        <img src="../assets/Open-Status.png" alt="Open Status">
+                                    </div>
+                                    <div>
+                                        <div class="badge badge-soft badge-error font-medium text-xs px-6 py-2 text-red-500">High</div>
+                                    </div>
+                                </div>
+                                <!-- bottom -->
+                                 <div class="flex flex-col gap-2">
+                                    <h1 class="text-base font-semibold text-gray-700">
+                                        Fix navigation menu on mobile devices
+                                    </h1>
+                                    <p class="text-sm font-normal text-gray-500">
+                                        The navigation menu doesn't collapse properly on mobile devices...
+                                    </p>
+                                    <div class="flex flex-row gap-1">
+                                        <div class="badge badge-error font-medium text-xs badge-outline">
+                                            <i class="fa-solid fa-bug"></i>Bug
+                                        </div>
+                                        <div class="badge badge-outline badge-warning font-medium text-xs">
+                                            <i class="fa-regular fa-life-ring"></i>Warning
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="divider"></div>
+                            <!-- Lower -->
+                             <div class="flex flex-col p-4 gap-2 pt-0 text-sm    font-normal text-gray-500">
+                                <span>#1 by john_doe</span>
+                                <span>1/15/2024</span>
+                             </div>
+                         </div>
+                        <!-- close -->
+                         <div class="bg-white shadow-md max-w-xs p-4 rounded-md border-t-4 border-violet-400">
+                            <!-- Upper -->
+                            <div class="p-4 pb-0 flex flex-col gap-4">
+                                <!-- Top -->
+                                <div class="flex flex-row justify-between">
+                                    <div>
+                                        <img src="../assets/Closed- Status .png" alt="Close Status">
+                                    </div>
+                                    <div>
+                                        <div class="badge badge-ghost text-gray-400">Low</div>
+                                    </div>
+                                </div>
+                                <!-- bottom -->
+                                 <div class="flex flex-col gap-2">
+                                    <h1 class="text-base font-semibold text-gray-700">
+                                        Fix navigation menu on mobile devices
+                                    </h1>
+                                    <p class="text-sm font-normal text-gray-500">
+                                        The navigation menu doesn't collapse properly on mobile devices...
+                                    </p>
+                                    <div class="flex flex-row gap-1">
+                                        <div class="badge badge-success badge-soft font-medium text-xs border border-green-300">
+                                            <i class="fa-solid fa-ranking-star"></i>Enancement
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="divider"></div>
+                            <!-- Lower -->
+                             <div class="flex flex-col p-4 gap-2 pt-0 text-sm    font-normal text-gray-500">
+                                <span>#1 by john_doe</span>
+                                <span>1/15/2024</span>
+                             </div>
+                         </div>
                     </div>
                 </div>
             </div>
